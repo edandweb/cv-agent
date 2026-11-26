@@ -15,9 +15,9 @@ const assessmentSchema = {
 const anthropicClient = new Anthropic();
 
 type Assessment = {
-    apply: boolean,
-    reason: string,
-    points_to_put_forward: string[],
+    apply: boolean;
+    reason: string;
+    points_to_put_forward: string[];
     gaps: string[];
 };
 
@@ -34,7 +34,7 @@ export async function assessJobForCandidate(postingText: string): Promise<Assess
             model: "claude-sonnet-5-5",
             max_tokens: 2048,
             system: profile,
-            messages: messages,
+            messages,
             tools: [readCVTool],
             output_config: { format: { type: "json_schema", schema: assessmentSchema } }
         });
