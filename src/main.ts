@@ -1,8 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { assessJobForCandidate } from "./agent.js";
 
-console.log("CV Agent is running");
-
 let jobDescription: string;
 const postingPath = process.argv[2];
 
@@ -21,13 +19,10 @@ try {
 }
 
 try {
-    const message = await assessJobForCandidate(jobDescription);
+    const assessment = await assessJobForCandidate(jobDescription);
 
-    for (const block of message.content) {
-        if (block.type === "text") {
-            console.log(block.text);
-        }
-    }
+    console.log(JSON.stringify(assessment, null, 2));
+
 } catch (err) {
     const reason = err instanceof Error ? err.message : String(err);
     console.error(reason);
