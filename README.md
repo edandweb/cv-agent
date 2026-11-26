@@ -8,7 +8,7 @@ No agent framework: the tool loop is hand-written on top of the Anthropic SDK.
 
 ## How it works
 
-1. `main.ts` reads the job posting from a file.
+1. `main.ts` reads the job posting from the path given on the command line.
 2. The posting is sent to the model with a system prompt describing the candidate.
 3. The model either answers or asks to call the `read_cv` tool.
 4. If it asks, the code runs the tool and sends the CV text back.
@@ -30,11 +30,12 @@ Create a `.env` file at the project root:
 ## Usage
 
 1. Paste your CV as Markdown into `data/cv.md`.
-2. Save the job posting as text in `<POSTING PATH>`.
-3. Edit the candidate profile in the system prompt (`<FILE>`).
-4. Run:
+2. Save a job posting as a text file in `data/postings/`,
+   for example `data/postings/acme.txt`.
+3. Edit the candidate profile in the system prompt, in `src/agent.ts`.
+4. Run the agent on that posting:
 
-       npm start
+       npm run start -- data/postings/acme.txt
 
 The `data/` folder is git-ignored, so your CV and postings stay local.
 
